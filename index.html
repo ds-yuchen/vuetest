@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title></title>
-    <style>
-        .is-loading {background: red;}
-    </style>
-</head>
+<head></head>
 <body>
 <div id="root">
-    <button :class="{'is-loading':isloading}" @click="checkMe">Add Name</button>
+    <h2>test1</h2>
+    <ul>
+        <li v-for="task in tasks" v-text="task.askQuty"></li>
+    </ul>
+    <h2>test2</h2>
+    <ul>
+        <li v-for="task in incompleted" v-text="task.askQuty"></li>
+    </ul>
 </div>
 <script src="https://unpkg.com/vue@2.1.3/dist/vue.js"></script>
 <script>
     var app = new Vue ({
         el:'#root',
         data:{
-            isloading:false
+            tasks:[
+                {askQuty:'西遊記',completed:true},
+                {askQuty:'金品美',completed:true},
+                {askQuty:'中國好聲音',completed:false},
+                {askQuty:'強強強',completed:true},
+                {askQuty:'愛拼才會贏',completed:false}
+            ]
         },
-        methods:{
-            checkMe(){
-                this.isloading = true;
+        computed:{
+            incompleted(){
+                return this.tasks.filter(task => ! task.completed);
             }
         }
     })
